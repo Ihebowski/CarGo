@@ -126,21 +126,53 @@ class ListPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SingleChildScrollView(
+                SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     left: 15,
                     top: 15,
                     bottom: 15,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      ListFilter(name: "Lowest Price", status: true),
-                      ListFilter(name: "Lowest Price", status: false),
-                      ListFilter(name: "Lowest Price", status: false),
-                      ListFilter(name: "Lowest Price", status: false),
-                    ],
+                  child: Obx(
+                    () {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ListFilter(
+                            name: "Lowest Price",
+                            isSelected: carController.selectedFilter.value ==
+                                'Lowest Price',
+                            onTap: () {
+                              carController.applyFilter('Lowest Price');
+                            },
+                          ),
+                          ListFilter(
+                            name: "Highest Price",
+                            isSelected: carController.selectedFilter.value ==
+                                'Highest Price',
+                            onTap: () {
+                              carController.applyFilter('Highest Price');
+                            },
+                          ),
+                          ListFilter(
+                            name: "Lowest Mileage",
+                            isSelected: carController.selectedFilter.value ==
+                                'Lowest Mileage',
+                            onTap: () {
+                              carController.applyFilter('Lowest Mileage');
+                            },
+                          ),
+                          ListFilter(
+                            name: "Highest Mileage",
+                            isSelected: carController.selectedFilter.value ==
+                                'Highest Mileage',
+                            onTap: () {
+                              carController.applyFilter('Highest Mileage');
+                            },
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
               ],
@@ -183,15 +215,14 @@ class ListPage extends StatelessWidget {
                           width: 75,
                           height: 75,
                         ),
-                        // const SizedBox(height: 10),
-                        // const Text(
-                        //   "Empty",
-                        //   style: TextStyle(
-                        //     color: blackColor,
-                        //     fontSize: 14,
-                        //     fontWeight: FontWeight.bold,
-                        //   ),
-                        // ),
+                        const Text(
+                          "Empty",
+                          style: TextStyle(
+                            color: blackColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ],
                     ),
                   ),

@@ -27,7 +27,7 @@ class User {
       userGender: data['userGender'],
       userEmail: data['userEmail'],
       userPhone: data['userPhone'],
-      favoriteCars: data['favoriteCars'],
+      favoriteCars: data['favoriteCars'] != null ? List.from(data['favoriteCars']) : [],
     );
   }
 

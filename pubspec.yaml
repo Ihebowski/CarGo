@@ -38,6 +38,7 @@ dependencies:
   firebase_core:
   firebase_auth:
   flutter_dotenv:
+  shared_preferences:
   cloud_firestore:
   firebase_storage:
   fluentui_system_icons:

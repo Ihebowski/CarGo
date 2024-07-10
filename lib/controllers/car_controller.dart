@@ -8,6 +8,8 @@ class CarController extends GetxController {
   var filteredCarList = <Car>[].obs;
   var selectedCar = Car().obs;
   var isLoading = true.obs;
+  RxString selectedFilter = RxString('');
+
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   void fetchCars() async {
@@ -76,6 +78,42 @@ class CarController extends GetxController {
     } else {
       filteredCarList.assignAll(brandedCarList.where((car) =>
           car.carModel.toLowerCase().contains(query.toLowerCase())));
+    }
+  }
+
+  void applyFilter(String filterName) {
+    selectedFilter.value = filterName;
+    switch (filterName) {
+      case 'Lowest Price':
+        sortCarsByPrice(true);
+        break;
+      case 'Highest Price':
+        sortCarsByPrice(false);
+        break;
+      case 'Lowest Mileage':
+        sortCarsByMileage(true);
+        break;
+      case 'Highest Mileage':
+        sortCarsByMileage(false);
+        break;
+      default:
+        break;
+    }
+  }
+
+  void sortCarsByPrice(bool ascending) {
+    if (ascending) {
+      filteredCarList.sort((a, b) => a.rentalPrice.compareTo(b.rentalPrice));
+    } else {
+      filteredCarList.sort((a, b) => b.rentalPrice.compareTo(a.rentalPrice));
+    }
+  }
+
+  void sortCarsByMileage(bool ascending) {
+    if (ascending) {
+      filteredCarList.sort((a, b) => a.carMileage.compareTo(b.carMileage));
+    } else {
+      filteredCarList.sort((a, b) => b.carMileage.compareTo(a.carMileage));
     }
   }
 }

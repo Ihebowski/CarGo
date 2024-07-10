@@ -1,6 +1,7 @@
 import 'package:cargo/firebase_options.dart' as firebase_options;
 import 'package:cargo/services/auth_service.dart';
 import 'package:cargo/views/auth/login_page.dart';
+import 'package:cargo/views/home/landing/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -11,7 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   firebase_options.loadFirebaseOptions();
   await Firebase.initializeApp(
-      options: firebase_options.DefaultFirebaseOptions.currentPlatform,
+    options: firebase_options.DefaultFirebaseOptions.currentPlatform,
   );
   Get.put(AuthService());
   runApp(const MyApp());
@@ -28,7 +29,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: Get.find<AuthService>().firestoreUser.value == null
+          ? const LoginPage()
+          : const HomePage(),
     );
   }
 }

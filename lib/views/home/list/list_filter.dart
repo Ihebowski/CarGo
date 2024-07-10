@@ -3,32 +3,38 @@ import 'package:flutter/material.dart';
 
 class ListFilter extends StatelessWidget {
   final String name;
-  final bool status;
+  final bool isSelected;
+  final VoidCallback onTap;
 
   const ListFilter({
     super.key,
     required this.name,
-    required this.status,
+    required this.isSelected,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 5),
-      child: Chip(
-        label: Text(
-          name,
-          style: TextStyle(
-            color: status?blackColor:darkGreyColor,
+      child: InkWell(
+        splashColor: Colors.transparent,
+        onTap: () => onTap(),
+        child: Chip(
+          label: Text(
+            name,
+            style: TextStyle(
+              color: isSelected ? blackColor : darkGreyColor,
+            ),
           ),
-        ),
-        backgroundColor: lightGreyColor,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: status?blackColor:lightGreyColor,
-            width: 1,
+          backgroundColor: lightGreyColor,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: isSelected ? blackColor : lightGreyColor,
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(50),
           ),
-          borderRadius: BorderRadius.circular(50),
         ),
       ),
     );
