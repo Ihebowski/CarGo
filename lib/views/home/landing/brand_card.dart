@@ -1,6 +1,6 @@
 import 'package:cargo/models/brand.dart';
-import 'package:cargo/views/home/image_loader.dart';
-import 'package:cargo/views/home/list_page.dart';
+import 'package:cargo/views/home/widgets/image_loader.dart';
+import 'package:cargo/views/home/list/list_page.dart';
 import 'package:cargo/views/variables/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

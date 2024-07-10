@@ -1,8 +1,8 @@
 import 'package:cargo/firebase_options.dart';
 import 'package:cargo/services/auth_service.dart';
 import 'package:cargo/views/auth/login_page.dart';
-import 'package:cargo/views/home/home_page.dart';
-import 'package:cargo/views/home/list_page.dart';
+import 'package:cargo/views/home/landing/home_page.dart';
+import 'package:cargo/views/home/list/list_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

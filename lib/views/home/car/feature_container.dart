@@ -1,8 +1,7 @@
 import 'package:cargo/models/car.dart';
+import 'package:cargo/views/home/car/feature_card.dart';
 import 'package:cargo/views/variables/colors.dart';
 import 'package:flutter/material.dart';
-
-import 'feature_card.dart';
 
 class FeatureContainer extends StatefulWidget {
   final Car car;

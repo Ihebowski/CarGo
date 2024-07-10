@@ -1,31 +1,29 @@
-import 'package:cargo/controllers/brand_controller.dart';
-import 'package:cargo/views/home/brand_card.dart';
+import 'package:cargo/controllers/car_controller.dart';
+import 'package:cargo/views/home/landing/recently_card.dart';
 import 'package:cargo/views/variables/colors.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BrandContainer extends StatelessWidget {
-  const BrandContainer({super.key});
+class RecentlyContainer extends StatelessWidget {
+  const RecentlyContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final BrandController brandController = Get.put(BrandController());
+    final CarController carController = Get.put(CarController());
+    carController.fetchCars();
 
     return SizedBox(
-      height: 200,
+      height: 175,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 15,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  "Browse by Brand",
+                  "Recently Added",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -45,28 +43,29 @@ class BrandContainer extends StatelessWidget {
                   child: const Icon(
                     FluentIcons.chevron_right_24_regular,
                     size: 20,
-                    color: blackColor,
                   ),
                 ),
               ],
             ),
           ),
           SizedBox(
-            height: 125,
+            height: 120,
             child: Obx(
               () {
-                if (brandController.brandList.isEmpty) {
+                if (carController.carList.isEmpty) {
                   return const Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      color: blackColor,
+                    ),
                   );
                 } else {
                   return ListView.builder(
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.only(left: 15),
-                    itemCount: brandController.brandList.length,
+                    itemCount: carController.carList.length,
                     itemBuilder: (context, index) {
-                      final brand = brandController.brandList[index];
-                      return BrandCard(brand: brand);
+                      final car = carController.carList[index];
+                      return RecentlyCard(car: car);
                     },
                   );
                 }

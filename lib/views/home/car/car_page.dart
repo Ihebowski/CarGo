@@ -1,6 +1,6 @@
 import 'package:cargo/models/car.dart';
-import 'package:cargo/views/home/feature_container.dart';
-import 'package:cargo/views/home/image_loader.dart';
+import 'package:cargo/views/home/car/feature_container.dart';
+import 'package:cargo/views/home/widgets/image_loader.dart';
 import 'package:cargo/views/variables/colors.dart';
 import 'package:cargo/views/variables/contants.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';

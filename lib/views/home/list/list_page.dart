@@ -1,7 +1,7 @@
 import 'package:cargo/controllers/car_controller.dart';
 import 'package:cargo/models/brand.dart';
-import 'package:cargo/views/home/list_card.dart';
-import 'package:cargo/views/home/list_filter.dart';
+import 'package:cargo/views/home/list/list_card.dart';
+import 'package:cargo/views/home/list/list_filter.dart';
 import 'package:cargo/views/variables/colors.dart';
 import 'package:cargo/views/variables/contants.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';

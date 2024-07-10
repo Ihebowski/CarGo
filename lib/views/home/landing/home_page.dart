@@ -1,8 +1,8 @@
-import 'package:cargo/views/home/brand_container.dart';
-import 'package:cargo/views/home/notification_page.dart';
-import 'package:cargo/views/home/profile_page.dart';
-import 'package:cargo/views/home/recently_container.dart';
-import 'package:cargo/views/home/trending_container.dart';
+import 'package:cargo/views/home/landing/brand_container.dart';
+import 'package:cargo/views/home/landing/recently_container.dart';
+import 'package:cargo/views/home/notification/notification_page.dart';
+import 'package:cargo/views/home/profile/profile_page.dart';
+import 'package:cargo/views/home/landing/trending_container.dart';
 import 'package:cargo/views/variables/colors.dart';
 import 'package:cargo/views/variables/contants.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';

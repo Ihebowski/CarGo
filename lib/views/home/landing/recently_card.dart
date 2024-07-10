@@ -1,6 +1,6 @@
 import 'package:cargo/models/car.dart';
-import 'package:cargo/views/home/car_page.dart';
-import 'package:cargo/views/home/image_loader.dart';
+import 'package:cargo/views/home/car/car_page.dart';
+import 'package:cargo/views/home/widgets/image_loader.dart';
 import 'package:cargo/views/variables/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
