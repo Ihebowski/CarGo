@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
           SliverFillRemaining(
             hasScrollBody: false,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Text(
                   "Login",

@@ -5,30 +5,51 @@ import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
   final AuthService authService = Get.find<AuthService>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
-  final birthdayController = TextEditingController();
-  final genderController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  var genderController = ''.obs;
+  final List<String> genderOptions = ['Male', 'Female', 'Other'];
   final phoneController = TextEditingController();
 
-  // void register() async {
-  //   try {
-  //     Map<String, dynamic> userDetails = {
-  //       'firstName': firstNameController.text,
-  //       'lastName': lastNameController.text,
-  //       'birthday': birthdayController.text,
-  //       'gender': genderController.text,
-  //       'phone': phoneController.text,
-  //       'email': emailController.text,
-  //     };
-  //
-  //     await authService.register(emailController.text, passwordController.text, userDetails);
-  //     Get.snackbar('Success', 'Registered successfully');
-  //     Get.offAll(const HomePage());
-  //   } catch (e) {
-  //     Get.snackbar('Error', 'Failed to register');
-  //   }
-  // }
+  void register() async {
+    try {
+      String firstName = firstNameController.text.trim();
+      String lastName = lastNameController.text.trim();
+      String email = emailController.text.trim();
+      String password = passwordController.text.trim();
+      String phone = phoneController.text.trim();
+      String gender = genderController.value;
+
+      if (firstName.isEmpty || lastName.isEmpty || email.isEmpty || password.isEmpty || phone.isEmpty || gender.isEmpty) {
+        Get.snackbar('Error', 'All fields are required');
+        return;
+      }
+
+      Map<String, dynamic> userDetails = {
+        'userFirstname': firstName,
+        'userLastname': lastName,
+        'userGender': gender,
+        'userEmail': email,
+        'userPhone': phone,
+      };
+
+      await authService.register(email, password, userDetails);
+      Get.snackbar('Success', 'Registered successfully');
+      Get.offAll(const HomePage());
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to register');
+    }
+  }
+
+  @override
+  void onClose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    phoneController.dispose();
+    super.onClose();
+  }
 }

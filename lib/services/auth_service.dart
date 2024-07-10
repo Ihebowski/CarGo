@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:get/get.dart';
+import 'package:cargo/models/user.dart' as cargo;
 
 class AuthService extends GetxService {
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final firebase.FirebaseAuth firebaseAuth = firebase.FirebaseAuth.instance;
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-  Rx<User?> firebaseUser = Rx<User?>(null);
-  Rx<Map<String, dynamic>?> firestoreUser = Rx<Map<String, dynamic>?>(null);
-
+  Rx<firebase.User?> firebaseUser = Rx<firebase.User?>(null);
+  Rx<cargo.User?> firestoreUser = Rx<cargo.User?>(null);
   @override
   void onInit() {
     super.onInit();
@@ -25,19 +25,19 @@ class AuthService extends GetxService {
   }
 
   Future<void> register(String email, String password, Map<String, dynamic> userDetails) async {
-    UserCredential userCredential = await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
-    User? user = userCredential.user;
+    firebase.UserCredential userCredential = await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+    firebase.User? user = userCredential.user;
 
     if (user != null) {
       await firebaseFirestore.collection('users').doc(user.uid).set(userDetails);
-      _setFirestoreUser(user);
+      await _setFirestoreUser(user);
     }
   }
 
-  Future<void> _setFirestoreUser(User? user) async {
+  Future<void> _setFirestoreUser(firebase.User? user) async {
     if (user != null) {
       DocumentSnapshot userDoc = await firebaseFirestore.collection('users').doc(user.uid).get();
-      firestoreUser.value = userDoc.data() as Map<String, dynamic>?;
+      firestoreUser.value = cargo.User.fromMap(userDoc.data() as Map<String, dynamic>, user.uid);
     } else {
       firestoreUser.value = null;
     }

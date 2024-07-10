@@ -4,19 +4,19 @@ class User {
   String userId;
   String userFirstname;
   String userLastname;
-  String userBirthday;
   String userGender;
   String userEmail;
   String userPhone;
+  List favoriteCars = [];
 
   User({
     required this.userId,
     required this.userFirstname,
     required this.userLastname,
-    required this.userBirthday,
     required this.userGender,
     required this.userEmail,
-    required this.userPhone
+    required this.userPhone,
+    required this.favoriteCars,
   });
 
   factory User.fromMap(Map<String, dynamic> data, String userId) {
@@ -24,10 +24,22 @@ class User {
       userId: userId,
       userFirstname: data['userFirstname'],
       userLastname: data['userLastname'],
-      userBirthday: data['userBirthday'],
       userGender: data['userGender'],
       userEmail: data['userEmail'],
       userPhone: data['userPhone'],
+      favoriteCars: data['favoriteCars'],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'userId': userId,
+      'userFirstname': userFirstname,
+      'userLastname': userLastname,
+      'userGender': userGender,
+      'userEmail': userEmail,
+      'userPhone': userPhone,
+      'favoriteCars' : favoriteCars,
+    };
   }
 }

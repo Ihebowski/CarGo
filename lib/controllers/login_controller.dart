@@ -17,4 +17,11 @@ class LoginController extends GetxController {
       Get.snackbar('Error', 'Failed to login');
     }
   }
+
+  @override
+  void onClose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.onClose();
+  }
 }
