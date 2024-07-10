@@ -1,16 +1,17 @@
-import 'package:cargo/firebase_options.dart';
+import 'package:cargo/firebase_options.dart' as firebase_options;
 import 'package:cargo/services/auth_service.dart';
 import 'package:cargo/views/auth/login_page.dart';
-import 'package:cargo/views/home/landing/home_page.dart';
-import 'package:cargo/views/home/list/list_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
 void main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
+  firebase_options.loadFirebaseOptions();
   await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
+      options: firebase_options.DefaultFirebaseOptions.currentPlatform,
   );
   Get.put(AuthService());
   runApp(const MyApp());

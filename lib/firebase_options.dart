@@ -3,6 +3,27 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+late String apiKeyAndroid;
+late String appIdAndroid;
+late String apiKeyIos;
+late String appIdIos;
+late String messagingSenderId;
+late String projectId;
+late String storageBucket;
+late String iosBundleId;
+
+void loadFirebaseOptions() {
+  apiKeyAndroid = dotenv.get('ANDROID_API_KEY');
+  appIdAndroid = dotenv.get('ANDROID_APP_ID');
+  apiKeyIos = dotenv.get('IOS_API_KEY');
+  appIdIos = dotenv.get('IOS_APP_ID');
+  messagingSenderId = dotenv.get('SENDER_ID');
+  projectId = dotenv.get('PROJECT_ID');
+  storageBucket = dotenv.get('STORAGE');
+  iosBundleId = dotenv.get('BUNDLE_ID');
+}
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -49,21 +70,21 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDtfbEFIGI1XNzJKASJCkZO9EmYv32mxno',
-    appId: '1:799059400049:android:3c9d2913fc263a2a9492d0',
-    messagingSenderId: '799059400049',
-    projectId: 'cargo-2b2bd',
-    storageBucket: 'cargo-2b2bd.appspot.com',
+  static FirebaseOptions android = FirebaseOptions(
+    apiKey: apiKeyAndroid,
+    appId: appIdAndroid,
+    messagingSenderId: messagingSenderId,
+    projectId: projectId,
+    storageBucket: storageBucket,
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBuYdQ87jZFEU8jEI0FBJwuYFdqqMjNhnw',
-    appId: '1:799059400049:ios:6dd364d1f62aabb29492d0',
-    messagingSenderId: '799059400049',
-    projectId: 'cargo-2b2bd',
-    storageBucket: 'cargo-2b2bd.appspot.com',
-    iosBundleId: 'com.example.cargo',
+  static FirebaseOptions ios = FirebaseOptions(
+    apiKey: apiKeyIos,
+    appId: appIdIos,
+    messagingSenderId: messagingSenderId,
+    projectId: projectId,
+    storageBucket: storageBucket,
+    iosBundleId: iosBundleId,
   );
 
 }
