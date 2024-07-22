@@ -1,3 +1,4 @@
+import 'package:cargo/controllers/profile_controller.dart';
 import 'package:cargo/models/car.dart';
 import 'package:cargo/views/home/car/feature_container.dart';
 import 'package:cargo/views/home/widgets/image_loader.dart';
@@ -16,6 +17,7 @@ class CarPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    final ProfileController profileController = Get.find();
 
     return Scaffold(
       backgroundColor: lightGreyColor,
@@ -38,16 +40,29 @@ class CarPage extends StatelessWidget {
             actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 5),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    FluentIcons.heart_24_regular,
-                    size: iconSize,
-                    color: blackColor,
-                  ),
-                  style: const ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(whiteColor),
-                  ),
+                child: Obx(
+                      () {
+                    final isFavorite = profileController.isFavorite(car.id);
+                    return IconButton(
+                      onPressed: () {
+                        if (isFavorite) {
+                          profileController.removeFromFavorites(car.id);
+                        } else {
+                          profileController.addToFavorites(car.id);
+                        }
+                      },
+                      icon: Icon(
+                        isFavorite
+                            ? FluentIcons.heart_24_filled
+                            : FluentIcons.heart_24_regular,
+                        size: iconSize,
+                        color: blackColor,
+                      ),
+                      style: const ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(whiteColor),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],

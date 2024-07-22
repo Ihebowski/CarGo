@@ -5,7 +5,7 @@ import 'package:cargo/services/auth_service.dart';
 
 enum ProfileTab {
   Favorite,
-  Edit,
+  Orders,
   Settings,
 }
 
@@ -17,7 +17,7 @@ class ProfileController extends GetxController {
     userGender: '',
     userEmail: '',
     userPhone: '',
-    favoriteCars: [],
+    favoriteCars: [].obs,
   ).obs;
   var isLoading = true.obs;
   var activeTab = ProfileTab.Favorite.obs;
@@ -33,6 +33,18 @@ class ProfileController extends GetxController {
     authService.firestoreUser.listen((firestoreUser) {
       user.value = firestoreUser!;
     });
+  }
+
+  void openFavoriteTab() {
+    activeTab.value = ProfileTab.Favorite;
+  }
+
+  void openEditTab() {
+    activeTab.value = ProfileTab.Orders;
+  }
+
+  void openSettingsTab() {
+    activeTab.value = ProfileTab.Settings;
   }
 
   void signOut() {
@@ -59,15 +71,31 @@ class ProfileController extends GetxController {
     }
   }
 
-  void openFavoriteTab() {
-    activeTab.value = ProfileTab.Favorite;
+  bool isFavorite(String carId) {
+    return user.value.favoriteCars.contains(carId);
   }
 
-  void openEditTab() {
-    activeTab.value = ProfileTab.Edit;
+  void addToFavorites(String carId) async {
+    try {
+      var updatedUser = user.value;
+      if (!updatedUser.favoriteCars.contains(carId)) {
+        updatedUser.favoriteCars.add(carId);
+        updateUserProfile(updatedUser);
+      }
+    } catch (e) {
+      print('Error adding car to favorites: $e');
+    }
   }
 
-  void openSettingsTab() {
-    activeTab.value = ProfileTab.Settings;
+  void removeFromFavorites(String carId) async {
+    try {
+      var updatedUser = user.value;
+      if (updatedUser.favoriteCars.contains(carId)) {
+        updatedUser.favoriteCars.remove(carId);
+        updateUserProfile(updatedUser);
+      }
+    } catch (e) {
+      print('Error removing car from favorites: $e');
+    }
   }
 }

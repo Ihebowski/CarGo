@@ -27,7 +27,8 @@ class User {
       userGender: data['userGender'],
       userEmail: data['userEmail'],
       userPhone: data['userPhone'],
-      favoriteCars: data['favoriteCars'] != null ? List.from(data['favoriteCars']) : [],
+      favoriteCars:
+          data['favoriteCars'] != null ? List.from(data['favoriteCars']) : [],
     );
   }
 
@@ -39,7 +40,7 @@ class User {
       'userGender': userGender,
       'userEmail': userEmail,
       'userPhone': userPhone,
-      'favoriteCars' : favoriteCars,
+      'favoriteCars': favoriteCars,
     };
   }
 }

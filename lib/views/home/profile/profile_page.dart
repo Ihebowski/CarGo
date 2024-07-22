@@ -48,13 +48,9 @@ class ProfilePage extends StatelessWidget {
             ],
           ),
           SliverToBoxAdapter(
-            child: Obx(() {
-              final user = profileController.user.value;
-              if (user == null) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
+            child: Obx(
+              () {
+                final user = profileController.user.value;
                 return Column(
                   children: [
                     const CircleAvatar(
@@ -81,8 +77,8 @@ class ProfilePage extends StatelessWidget {
                           onTap: () => profileController.openFavoriteTab(),
                         ),
                         _buildTabButton(
-                          icon: FluentIcons.edit_24_regular,
-                          text: "Edit",
+                          icon: FluentIcons.mail_inbox_24_regular,
+                          text: "Orders",
                           onTap: () => profileController.openEditTab(),
                         ),
                         _buildTabButton(
@@ -94,27 +90,29 @@ class ProfilePage extends StatelessWidget {
                     ),
                     const Padding(
                       padding:
-                      EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 25),
                       child: Divider(
                         color: darkLightGreyColor,
                       ),
                     ),
-                    Obx(() {
-                      final activeTab = profileController.activeTab.value;
-                      if (activeTab == ProfileTab.Favorite) {
-                        return _buildFavoriteTabContent();
-                      } else if (activeTab == ProfileTab.Edit) {
-                        return _buildEditTabContent();
-                      } else if (activeTab == ProfileTab.Settings) {
-                        return _buildSettingsTabContent();
-                      } else {
-                        return Container();
-                      }
-                    }),
+                    Obx(
+                      () {
+                        final activeTab = profileController.activeTab.value;
+                        if (activeTab == ProfileTab.Favorite) {
+                          return _buildFavoriteTabContent();
+                        } else if (activeTab == ProfileTab.Orders) {
+                          return _buildOrdersTabContent();
+                        } else if (activeTab == ProfileTab.Settings) {
+                          return _buildSettingsTabContent();
+                        } else {
+                          return Container();
+                        }
+                      },
+                    ),
                   ],
                 );
-              }
-            }),
+              },
+            ),
           ),
         ],
       ),
@@ -123,7 +121,9 @@ class ProfilePage extends StatelessWidget {
 }
 
 Widget _buildTabButton(
-    {required IconData icon, required String text, required VoidCallback onTap}) {
+    {required IconData icon,
+    required String text,
+    required VoidCallback onTap}) {
   return Column(
     children: [
       Padding(
@@ -145,19 +145,43 @@ Widget _buildTabButton(
 }
 
 Widget _buildFavoriteTabContent() {
-  return Container(
-    // Replace with your favorite tab content
-    child: const Center(
-      child: Text("Favorite Tab Content"),
-    ),
+  final ProfileController profileController = Get.find();
+
+  return Obx(
+        () {
+      final favoriteCars = profileController.user.value.favoriteCars;
+
+      if (favoriteCars.isEmpty) {
+        return const Center(
+          child: Text("No favorite cars yet"),
+        );
+      } else {
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: favoriteCars.length,
+          itemBuilder: (context, index) {
+            final carId = favoriteCars[index];
+            return ListTile(
+              title: Text('Car ID: $carId'),
+              trailing: IconButton(
+                icon: const Icon(FluentIcons.delete_24_regular),
+                onPressed: () {
+                  profileController.removeFromFavorites(carId);
+                },
+              ),
+            );
+          },
+        );
+      }
+    },
   );
 }
 
-Widget _buildEditTabContent() {
+Widget _buildOrdersTabContent() {
   return Container(
     // Replace with your edit tab content
     child: const Center(
-      child: Text("Edit Tab Content"),
+      child: Text("Orders Tab Content"),
     ),
   );
 }

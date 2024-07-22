@@ -1,3 +1,4 @@
+import 'package:cargo/bindings.dart';
 import 'package:cargo/firebase_options.dart' as firebase_options;
 import 'package:cargo/services/auth_service.dart';
 import 'package:cargo/views/auth/login_page.dart';
@@ -14,7 +15,7 @@ void main() async {
   await Firebase.initializeApp(
     options: firebase_options.DefaultFirebaseOptions.currentPlatform,
   );
-  Get.put(AuthService());
+  AppBindings().dependencies();
   runApp(const MyApp());
 }
 

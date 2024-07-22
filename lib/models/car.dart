@@ -66,4 +66,33 @@ class Car {
       availability: data['pricingAvailability']['availability'],
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'brandId': brandId,
+      'carHighlight': carHighlight,
+      'basicInformation': {
+        'carImage': carImage,
+        'carBrand': carBrand,
+        'carModel': carModel,
+        'carMileage': carMileage,
+        'yearManufacture': yearManufacture,
+        'carType': carType,
+        'transmissionType': transmissionType,
+        'fuelType': fuelType,
+        'carColor': carColor,
+      },
+      'performanceCapacity': {
+        'horsepower': horsepower,
+        'fuelEfficiency': fuelEfficiency,
+        'seatingCapacity': seatingCapacity,
+        'trunkSpace': trunkSpace,
+      },
+      'pricingAvailability': {
+        'availability': availability,
+        'rentalPrice': rentalPrice,
+      },
+    };
+  }
 }

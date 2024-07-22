@@ -1,3 +1,4 @@
+import 'package:cargo/controllers/profile_controller.dart';
 import 'package:cargo/views/home/landing/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
