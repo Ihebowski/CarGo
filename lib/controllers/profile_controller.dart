@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cargo/views/auth/login_page.dart';
 import 'package:get/get.dart';
 import 'package:cargo/models/user.dart' as cargo;
@@ -17,6 +19,7 @@ class ProfileController extends GetxController {
     userGender: '',
     userEmail: '',
     userPhone: '',
+    profilePicUrl: '',
     favoriteCars: [].obs,
   ).obs;
   var isLoading = true.obs;
@@ -47,9 +50,9 @@ class ProfileController extends GetxController {
     activeTab.value = ProfileTab.Settings;
   }
 
-  void signOut() {
+  void signOut() async {
     try {
-      authService.signOut();
+      await authService.signOut();
       Get.offAll(const LoginPage());
     } catch (e) {
       print('Error updating user profile: $e');

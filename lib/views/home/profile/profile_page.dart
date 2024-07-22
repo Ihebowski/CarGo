@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cargo/views/home/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -10,7 +13,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProfileController profileController = Get.put(ProfileController());
+    final ProfileController profileController = Get.find();
 
     return Scaffold(
       backgroundColor: whiteColor,
@@ -36,7 +39,7 @@ class ProfilePage extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 5),
                 child: IconButton(
                   onPressed: () {
-                    profileController.authService.signOut();
+                    profileController.signOut();
                   },
                   icon: const Icon(
                     FluentIcons.sign_out_24_regular,
@@ -53,9 +56,12 @@ class ProfilePage extends StatelessWidget {
                 final user = profileController.user.value;
                 return Column(
                   children: [
-                    const CircleAvatar(
-                      backgroundColor: blueColor,
+                    CircleAvatar(
                       minRadius: 75,
+                      child: ImageLoader(
+                        imageUrl: user.profilePicUrl,
+                        imageColor: true,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 15, bottom: 30),
@@ -99,7 +105,7 @@ class ProfilePage extends StatelessWidget {
                       () {
                         final activeTab = profileController.activeTab.value;
                         if (activeTab == ProfileTab.Favorite) {
-                          return _buildFavoriteTabContent();
+                          return _buildFavoriteTabContent(profileController);
                         } else if (activeTab == ProfileTab.Orders) {
                           return _buildOrdersTabContent();
                         } else if (activeTab == ProfileTab.Settings) {
@@ -144,11 +150,9 @@ Widget _buildTabButton(
   );
 }
 
-Widget _buildFavoriteTabContent() {
-  final ProfileController profileController = Get.find();
-
+Widget _buildFavoriteTabContent(ProfileController profileController) {
   return Obx(
-        () {
+    () {
       final favoriteCars = profileController.user.value.favoriteCars;
 
       if (favoriteCars.isEmpty) {

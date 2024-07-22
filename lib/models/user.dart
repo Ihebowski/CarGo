@@ -7,6 +7,7 @@ class User {
   String userGender;
   String userEmail;
   String userPhone;
+  String profilePicUrl;
   List favoriteCars = [];
 
   User({
@@ -16,6 +17,7 @@ class User {
     required this.userGender,
     required this.userEmail,
     required this.userPhone,
+    required this.profilePicUrl,
     required this.favoriteCars,
   });
 
@@ -27,6 +29,7 @@ class User {
       userGender: data['userGender'],
       userEmail: data['userEmail'],
       userPhone: data['userPhone'],
+      profilePicUrl: data['profilePicUrl'],
       favoriteCars:
           data['favoriteCars'] != null ? List.from(data['favoriteCars']) : [],
     );
@@ -40,6 +43,7 @@ class User {
       'userGender': userGender,
       'userEmail': userEmail,
       'userPhone': userPhone,
+      'profilePicUrl': profilePicUrl,
       'favoriteCars': favoriteCars,
     };
   }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cargo/services/auth_service.dart';
 import 'package:cargo/views/home/landing/home_page.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +34,7 @@ class RegisterController extends GetxController {
         'userLastname': lastName,
         'userGender': gender,
         'userEmail': email,
+        'profilePicUrl': '',
         'userPhone': phone,
       };
 
