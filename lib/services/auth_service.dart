@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cargo/views/home/landing/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
@@ -75,7 +74,7 @@ class AuthService extends GetxService {
     }
   }
 
-  Future<void> register(
+  Future<void> signUp(
       String email, String password, Map<String, dynamic> userDetails) async {
     firebase.UserCredential userCredential;
     firebase.User? user;

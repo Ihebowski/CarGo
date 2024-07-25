@@ -82,38 +82,46 @@ class LoginPage extends StatelessWidget {
                       ),
                       child: TextField(
                         controller: loginController.passwordController,
-                        obscureText: true,
+                        obscureText: loginController.isObscure.value,
                         decoration: InputDecoration(
-                            hintText: "Password",
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 25,
-                              vertical: 10,
+                          hintText: "Password",
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 25,
+                            vertical: 10,
+                          ),
+                          hintStyle: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            color: darkGreyColor,
+                          ),
+                          filled: true,
+                          fillColor: lightGreyColor,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: lightGreyColor,
+                              width: 1,
                             ),
-                            hintStyle: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
-                              color: darkGreyColor,
-                            ),
-                            filled: true,
-                            fillColor: lightGreyColor,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: lightGreyColor,
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: blackColor,
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            suffixIcon: const Icon(
-                              FluentIcons.eye_24_regular,
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
                               color: blackColor,
-                            )),
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              loginController.isObscure.value
+                                  ? FluentIcons.eye_24_regular
+                                  : FluentIcons.eye_off_24_regular,
+                              color: blackColor,
+                            ),
+                            onPressed: () {
+                              loginController.toggleObscure();
+                            },
+                          ),
+                        ),
                         cursorColor: blueColor,
                       ),
                     ),

@@ -15,7 +15,7 @@ class RegisterController extends GetxController {
   final List<String> genderOptions = ['Male', 'Female', 'Other'];
   final phoneController = TextEditingController();
 
-  void register() async {
+  void signUp() async {
     try {
       String firstName = firstNameController.text.trim();
       String lastName = lastNameController.text.trim();
@@ -38,7 +38,7 @@ class RegisterController extends GetxController {
         'userPhone': phone,
       };
 
-      await authService.register(email, password, userDetails);
+      await authService.signUp(email, password, userDetails);
       Get.snackbar('Success', 'Registered successfully');
       Get.offAll(const HomePage());
     } catch (e) {

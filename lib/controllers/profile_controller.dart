@@ -6,12 +6,14 @@ import 'package:cargo/models/user.dart' as cargo;
 import 'package:cargo/services/auth_service.dart';
 
 enum ProfileTab {
-  Favorite,
-  Orders,
-  Settings,
+  favorite,
+  reservations,
+  settings,
 }
 
 class ProfileController extends GetxController {
+  final AuthService authService = Get.find();
+
   var user = cargo.User(
     userId: '',
     userFirstname: '',
@@ -23,9 +25,7 @@ class ProfileController extends GetxController {
     favoriteCars: [].obs,
   ).obs;
   var isLoading = true.obs;
-  var activeTab = ProfileTab.Favorite.obs;
-
-  final AuthService authService = Get.find();
+  var activeTab = ProfileTab.favorite.obs;
 
   @override
   void onInit() {
@@ -39,15 +39,15 @@ class ProfileController extends GetxController {
   }
 
   void openFavoriteTab() {
-    activeTab.value = ProfileTab.Favorite;
+    activeTab.value = ProfileTab.favorite;
   }
 
-  void openEditTab() {
-    activeTab.value = ProfileTab.Orders;
+  void openReservationsTab() {
+    activeTab.value = ProfileTab.reservations;
   }
 
   void openSettingsTab() {
-    activeTab.value = ProfileTab.Settings;
+    activeTab.value = ProfileTab.settings;
   }
 
   void signOut() async {
@@ -55,7 +55,7 @@ class ProfileController extends GetxController {
       await authService.signOut();
       Get.offAll(const LoginPage());
     } catch (e) {
-      print('Error updating user profile: $e');
+      log('Error updating user profile: $e');
     }
   }
 
@@ -68,7 +68,7 @@ class ProfileController extends GetxController {
           .set(updatedUser.toMap());
       user.value = updatedUser;
     } catch (e) {
-      print('Error updating user profile: $e');
+      log('Error updating user profile: $e');
     } finally {
       isLoading(false);
     }
@@ -86,7 +86,7 @@ class ProfileController extends GetxController {
         updateUserProfile(updatedUser);
       }
     } catch (e) {
-      print('Error adding car to favorites: $e');
+      log('Error adding car to favorites: $e');
     }
   }
 
@@ -98,7 +98,7 @@ class ProfileController extends GetxController {
         updateUserProfile(updatedUser);
       }
     } catch (e) {
-      print('Error removing car from favorites: $e');
+      log('Error removing car from favorites: $e');
     }
   }
 }

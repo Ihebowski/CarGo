@@ -7,6 +7,7 @@ class LoginController extends GetxController {
   final AuthService authService = Get.find<AuthService>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final isObscure = true.obs;
 
   void signIn() async {
     try {
@@ -16,6 +17,10 @@ class LoginController extends GetxController {
     } catch (e) {
       Get.snackbar('Error', 'Failed to login');
     }
+  }
+
+  void toggleObscure() {
+    isObscure.value = !isObscure.value;
   }
 
   @override

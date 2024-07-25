@@ -295,7 +295,7 @@ class RegisterPage extends StatelessWidget {
                         vertical: 25,
                       ),
                       child: ElevatedButton(
-                        onPressed: () => registerController.register(),
+                        onPressed: () => registerController.signUp(),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: blueColor,
                           shape: RoundedRectangleBorder(

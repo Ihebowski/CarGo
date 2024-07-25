@@ -52,16 +52,17 @@ class ProfilePage extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Obx(
-              () {
+                  () {
                 final user = profileController.user.value;
                 return Column(
                   children: [
                     CircleAvatar(
                       minRadius: 75,
-                      child: ImageLoader(
-                        imageUrl: user.profilePicUrl,
-                        imageColor: true,
-                      ),
+                      // child: ImageLoader(
+                      //   imageUrl: user.profilePicUrl,
+                      //   imageColor: true,
+                      // ),
+                      child: Text("url ${user.profilePicUrl}"),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 15, bottom: 30),
@@ -79,36 +80,42 @@ class ProfilePage extends StatelessWidget {
                       children: [
                         _buildTabButton(
                           icon: FluentIcons.heart_24_regular,
+                          filledIcon: FluentIcons.heart_24_filled,
                           text: "Favorite",
+                          isSelected: profileController.activeTab.value == ProfileTab.favorite,
                           onTap: () => profileController.openFavoriteTab(),
                         ),
                         _buildTabButton(
                           icon: FluentIcons.mail_inbox_24_regular,
-                          text: "Orders",
-                          onTap: () => profileController.openEditTab(),
+                          filledIcon: FluentIcons.mail_inbox_24_filled,
+                          text: "Reservations",
+                          isSelected: profileController.activeTab.value == ProfileTab.reservations,
+                          onTap: () => profileController.openReservationsTab(),
                         ),
                         _buildTabButton(
                           icon: FluentIcons.settings_24_regular,
+                          filledIcon: FluentIcons.settings_24_filled,
                           text: "Settings",
+                          isSelected: profileController.activeTab.value == ProfileTab.settings,
                           onTap: () => profileController.openSettingsTab(),
                         ),
                       ],
                     ),
                     const Padding(
                       padding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+                      EdgeInsets.symmetric(vertical: 15, horizontal: 25),
                       child: Divider(
                         color: darkLightGreyColor,
                       ),
                     ),
                     Obx(
-                      () {
+                          () {
                         final activeTab = profileController.activeTab.value;
-                        if (activeTab == ProfileTab.Favorite) {
+                        if (activeTab == ProfileTab.favorite) {
                           return _buildFavoriteTabContent(profileController);
-                        } else if (activeTab == ProfileTab.Orders) {
-                          return _buildOrdersTabContent();
-                        } else if (activeTab == ProfileTab.Settings) {
+                        } else if (activeTab == ProfileTab.reservations) {
+                          return _buildReservationsTabContent();
+                        } else if (activeTab == ProfileTab.settings) {
                           return _buildSettingsTabContent();
                         } else {
                           return Container();
@@ -128,8 +135,10 @@ class ProfilePage extends StatelessWidget {
 
 Widget _buildTabButton(
     {required IconData icon,
-    required String text,
-    required VoidCallback onTap}) {
+      required IconData filledIcon,
+      required String text,
+      required bool isSelected,
+      required VoidCallback onTap}) {
   return Column(
     children: [
       Padding(
@@ -137,7 +146,7 @@ Widget _buildTabButton(
         child: IconButton(
           onPressed: onTap,
           icon: Icon(
-            icon,
+            isSelected ? filledIcon : icon,
             size: iconSize,
             color: blackColor,
           ),
@@ -152,7 +161,7 @@ Widget _buildTabButton(
 
 Widget _buildFavoriteTabContent(ProfileController profileController) {
   return Obx(
-    () {
+        () {
       final favoriteCars = profileController.user.value.favoriteCars;
 
       if (favoriteCars.isEmpty) {
@@ -181,11 +190,11 @@ Widget _buildFavoriteTabContent(ProfileController profileController) {
   );
 }
 
-Widget _buildOrdersTabContent() {
+Widget _buildReservationsTabContent() {
   return Container(
-    // Replace with your edit tab content
+    // Replace with your reservations tab content
     child: const Center(
-      child: Text("Orders Tab Content"),
+      child: Text("Reservations Tab Content"),
     ),
   );
 }
