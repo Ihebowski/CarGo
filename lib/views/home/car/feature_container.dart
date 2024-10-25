@@ -42,10 +42,10 @@ class _FeatureContainerState extends State<FeatureContainer> {
           ];
         case "Condition & Maintenance":
           return [
-            FeatureCard(title: "Condition", content: ""),
-            FeatureCard(title: "Last Service", content: ""),
-            FeatureCard(title: "Mileage", content: ""),
-            FeatureCard(title: "Warranty", content: ""),
+            const FeatureCard(title: "Condition", content: ""),
+            const FeatureCard(title: "Last Service", content: ""),
+            const FeatureCard(title: "Mileage", content: ""),
+            const FeatureCard(title: "Warranty", content: ""),
           ];
         default:
           return [];

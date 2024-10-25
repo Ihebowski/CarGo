@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cargo/models/car.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -22,11 +24,11 @@ class CarController extends GetxController {
         carList.assignAll(cars);
         isLoading(false);
       }, onError: (error) {
-        print('Error fetching cars: $error');
+        log('Error fetching cars: $error');
         isLoading(false);
       });
     } catch (e) {
-      print('Unexpected error: $e');
+      log('Unexpected error: $e');
       isLoading(false);
     }
   }
@@ -46,11 +48,11 @@ class CarController extends GetxController {
         filteredCarList.assignAll(cars);
         isLoading(false);
       }, onError: (error) {
-        print('Error fetching cars by brand: $error');
+        log('Error fetching cars by brand: $error');
         isLoading(false);
       });
     } catch (e) {
-      print('Unexpected error: $e');
+      log('Unexpected error: $e');
       isLoading(false);
     }
   }
@@ -66,7 +68,7 @@ class CarController extends GetxController {
         selectedCar.value = Car();
       }
     } catch (e) {
-      print('Error fetching car by ID: $e');
+      log('Error fetching car by ID: $e');
     } finally {
       isLoading(false);
     }

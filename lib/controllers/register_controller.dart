@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cargo/services/auth_service.dart';
 import 'package:cargo/views/home/landing/home_page.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +12,7 @@ class RegisterController extends GetxController {
   var genderController = ''.obs;
   final List<String> genderOptions = ['Male', 'Female', 'Other'];
   final phoneController = TextEditingController();
+  var isChecked = false.obs;
 
   void signUp() async {
     try {
@@ -24,8 +23,14 @@ class RegisterController extends GetxController {
       String phone = phoneController.text.trim();
       String gender = genderController.value;
 
+
       if (firstName.isEmpty || lastName.isEmpty || email.isEmpty || password.isEmpty || phone.isEmpty || gender.isEmpty) {
         Get.snackbar('Error', 'All fields are required');
+        return;
+      }
+
+      if(isChecked.isFalse){
+        Get.snackbar('Error', 'Agree on Terms and Conditions');
         return;
       }
 

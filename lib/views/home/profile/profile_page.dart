@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cargo/views/home/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -58,11 +56,14 @@ class ProfilePage extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       minRadius: 75,
-                      // child: ImageLoader(
-                      //   imageUrl: user.profilePicUrl,
-                      //   imageColor: true,
-                      // ),
-                      child: Text("url ${user.profilePicUrl}"),
+                      maxRadius: 75,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(75),
+                        child: ImageLoader(
+                          imageUrl: user.profilePicUrl,
+                          imageColor: true,
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 15, bottom: 30),

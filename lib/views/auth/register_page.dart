@@ -287,12 +287,47 @@ class RegisterPage extends StatelessWidget {
                     Container(
                       height: 50,
                       width: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 45,
+                        vertical: 5,
+                      ),
+                      child: Row(
+                        children: [
+                          Obx(
+                            () {
+                              return Checkbox(
+                                value: registerController.isChecked.value,
+                                side: const BorderSide(
+                                  color: darkLightGreyColor,
+                                ),
+                                activeColor: darkLightGreyColor,
+                                checkColor: blackColor,
+                                onChanged: (value) {
+                                  registerController.isChecked.value = value!;
+                                },
+                              );
+                            },
+                          ),
+                          const Text(
+                            "I agree to the Terms and Conditions.",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: darkGreyColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 50,
+                      width: double.infinity,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 10,
                       ),
                       margin: const EdgeInsets.symmetric(
                         horizontal: 45,
-                        vertical: 25,
+                        vertical: 15,
                       ),
                       child: ElevatedButton(
                         onPressed: () => registerController.signUp(),

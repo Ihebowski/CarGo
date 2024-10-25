@@ -72,7 +72,7 @@ class CarPage extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  height: height * 0.325,
+                  height: height * 0.25,
                   width: width,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 30,
@@ -90,6 +90,7 @@ class CarPage extends StatelessWidget {
                   child: Container(
                     width: width,
                     padding: const EdgeInsets.symmetric(
+                      vertical: 10,
                       horizontal: 15,
                     ),
                     decoration: const BoxDecoration(

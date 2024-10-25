@@ -1,5 +1,3 @@
-import 'car.dart';
-
 class User {
   String userId;
   String userFirstname;
