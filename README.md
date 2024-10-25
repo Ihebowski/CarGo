@@ -38,14 +38,14 @@ Here are some screenshots of the GeoQuest app in action:
 </div>
 *Home Page showing recently added cars, Brands and Trend topics.*
 
-### Leaderboard Page
+### Category Page
 
 <div style="display: flex; justify-content: space-around;">
     <img src="assets/screenshots/category_page.png" alt="Search Page" width="300" style="margin: 10px;"/>
 </div>
 *Category Page for displaying cars for chosen brand.*
 
-### Quiz Page
+### Car Page
 
 <div style="display: flex; justify-content: space-around;">
     <img src="assets/screenshots/car_page.png" alt="Bookmark Page" width="300" style="margin: 10px;"/>
